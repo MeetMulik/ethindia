@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 const Navbar = () => {
   const [state, setState] = useState(false);
@@ -62,9 +63,9 @@ const Navbar = () => {
             <li className="order-2 pb-5 md:pb-0">
               <a
                 href="javascript:void(0)"
-                className="py-3 px-6 rounded-md shadow-md text-white text-center bg-indigo-500 focus:shadow-none block md:inline"
+                className=" rounded-md shadow-md text-white text-center focus:shadow-none block md:inline"
               >
-                Sign In
+                <ConnectButton />
               </a>
             </li>
             <div className="order-1 flex-1 justify-center items-center space-y-5 md:flex md:space-x-6 md:space-y-0">
