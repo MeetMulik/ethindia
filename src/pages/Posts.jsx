@@ -17,9 +17,9 @@ const Posts = () => {
   }, []);
 
   return (
-    <div className="flex bg-gray-500">
+    <div className="scrollbar-hide lg:relative flex bg-gray-500">
       <Sidebar />
-      <div className="scroll-smooth flex items-center justify-center w-full flex-col space-y-5 mt-3 mb-4">
+      <div className="scrollbar-hide lg:relative lg:left-20 scroll-smooth flex items-center justify-center w-full flex-col space-y-5 mt-3 mb-4">
         {reports.length > 0 ? (
           reports.map((report, idx) => (
             <PostCard
