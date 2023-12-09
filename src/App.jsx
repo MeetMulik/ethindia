@@ -1,19 +1,32 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
+import Posts from "./pages/Posts";
 
 import LandingPage from "./pages/LandingPage";
 import AddReport from "./pages/AddReport";
+import Layout from "./components/Layout";
 
 const App = () => {
   return (
     <Router>
-      <Navbar />
       <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/addreport" element={<AddReport />} />
+        <Route
+          path="/"
+          element={
+            <Layout>
+              <LandingPage />
+            </Layout>
+          }
+        />
+        <Route
+          path="/addreport"
+          element={
+            <Layout>
+              <AddReport />
+            </Layout>
+          }
+        />
+        <Route path="/posts" element={<Posts />} />
       </Routes>
-      <Footer />
     </Router>
   );
 };

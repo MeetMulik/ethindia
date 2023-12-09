@@ -4,7 +4,7 @@ import useMyLocation from "../hooks/useMyLocation";
 
 const AddReport = () => {
   const { location } = useMyLocation();
-  console.log(location.latitude, location.longitude);
+  console.log(location.address);
 
   const [reportTitle, setReportTitle] = useState("");
   const [imageUrl, setImageUrl] = useState("");
