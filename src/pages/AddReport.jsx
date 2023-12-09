@@ -1,6 +1,8 @@
 /* eslint-disable no-unused-vars */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useMyLocation from "../hooks/useMyLocation";
+import { ethers } from "ethers";
+import { connectWithReportContract, connectWallet } from "../api/index";
 
 const AddReport = () => {
   const { location } = useMyLocation();
@@ -11,16 +13,27 @@ const AddReport = () => {
   const [locationName, setLocationName] = useState("");
   const [governmentBody, setGovernmentBody] = useState("");
   const [message, setMessage] = useState("");
+  const [userName, setName] = useState("");
+  const [account, setAccount] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log({
+    const contract = await connectWithReportContract();
+    const connectAccount = await connectWallet();
+    setAccount(connectAccount);
+    console.log(connectAccount);
+    const userName = await contract.getUsername(connectAccount);
+    console.log(userName);
+    setName(userName);
+
+    const response = await contract.addReport(
       reportTitle,
       imageUrl,
-      locationName,
-      governmentBody,
       message,
-    });
+      userName,
+      locationName,
+      governmentBody
+    );
   };
 
   return (
