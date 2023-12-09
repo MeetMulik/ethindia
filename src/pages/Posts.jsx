@@ -1,4 +1,3 @@
-import Post from "../components/Post";
 import PostCard from "../components/PostCard";
 import Sidebar from "../components/Sidebar";
 
