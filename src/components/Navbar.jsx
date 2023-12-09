@@ -1,28 +1,22 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [state, setState] = useState(false);
-
-  const navigation = [
-    { title: "Customers", path: "javascript:void(0)" },
-    { title: "Careers", path: "javascript:void(0)" },
-    { title: "Guides", path: "javascript:void(0)" },
-    { title: "Partners", path: "javascript:void(0)" },
-  ];
 
   return (
     <>
       <header className="z-100">
         <nav className="items-center pt-5 z-100 px-4 mx-auto max-w-screen-xl sm:px-8 md:flex md:space-x-6">
           <div className="flex justify-between">
-            <a href="javascript:void(0)">
+            <Link to="/">
               <img
                 src="https://svgshare.com/i/10Zu.svg"
                 width={120}
                 height={50}
                 alt="Site Logo"
               />
-            </a>
+            </Link>
             <button
               className="text-gray-500 outline-none md:hidden"
               onClick={() => setState(!state)}
@@ -74,11 +68,12 @@ const Navbar = () => {
               </a>
             </li>
             <div className="order-1 flex-1 justify-center items-center space-y-5 md:flex md:space-x-6 md:space-y-0">
-              {navigation.map((item, idx) => (
-                <li className="text-gray-500 hover:text-indigo-600" key={idx}>
-                  <a href={item.path}>{item.title}</a>
-                </li>
-              ))}
+              <li className="text-gray-500 hover:text-indigo-600">
+                <Link to={"/addreport"}>Add Report</Link>
+              </li>
+              <li className="text-gray-500 hover:text-indigo-600">
+                <Link href={"/view"}>View</Link>
+              </li>
             </div>
           </ul>
         </nav>
