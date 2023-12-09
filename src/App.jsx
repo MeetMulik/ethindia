@@ -4,6 +4,7 @@ import Posts from "./pages/Posts";
 import LandingPage from "./pages/LandingPage";
 import AddReport from "./pages/AddReport";
 import Layout from "./components/Layout";
+import ViewPosts from "./pages/ViewPosts";
 
 const App = () => {
   return (
@@ -22,6 +23,14 @@ const App = () => {
           element={
             <Layout>
               <AddReport />
+            </Layout>
+          }
+        />
+        <Route
+          path="/view"
+          element={
+            <Layout>
+              <ViewPosts />
             </Layout>
           }
         />

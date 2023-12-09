@@ -17,6 +17,9 @@ import {
 } from "wagmi/chains";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
+import { AnonAadhaarProvider } from "anon-aadhaar-react";
+
+const app_id = "1207867309004712866762058872244027119078920421376";
 
 const { chains, publicClient } = configureChains(
   [
@@ -50,9 +53,11 @@ const wagmiConfig = createConfig({
 ReactDOM.createRoot(document.getElementById("root")).render(
   <WagmiConfig config={wagmiConfig}>
     <RainbowKitProvider chains={chains}>
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
+      <AnonAadhaarProvider _appId={app_id}>
+        <React.StrictMode>
+          <App />
+        </React.StrictMode>
+      </AnonAadhaarProvider>
     </RainbowKitProvider>
   </WagmiConfig>
 );
