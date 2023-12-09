@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { AnonAadhaarProvider } from "anon-aadhaar-react";
 import App from "./App.jsx";
 import "./index.css";
 import "@rainbow-me/rainbowkit/styles.css";
@@ -47,12 +48,16 @@ const wagmiConfig = createConfig({
   publicClient,
 });
 
+const app_id = "1207867309004712866762058872244027119078920421376";
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <WagmiConfig config={wagmiConfig}>
     <RainbowKitProvider chains={chains}>
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
+      <AnonAadhaarProvider _appId={app_id}>
+        <React.StrictMode>
+          <App />
+        </React.StrictMode>
+      </AnonAadhaarProvider>
     </RainbowKitProvider>
   </WagmiConfig>
 );
