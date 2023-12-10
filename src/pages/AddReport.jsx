@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import useMyLocation from "../hooks/useMyLocation";
 import { ethers } from "ethers";
 import { connectWithReportContract, connectWallet } from "../api/index";
+import { Web3Storage } from "web3.storage";
 
 const AddReport = () => {
   const { location } = useMyLocation();
@@ -15,6 +16,9 @@ const AddReport = () => {
   const [message, setMessage] = useState("");
   const [userName, setName] = useState("");
   const [account, setAccount] = useState("");
+  const [file, setFile] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,14 +30,101 @@ const AddReport = () => {
     console.log(userName);
     setName(userName);
 
-    const response = await contract.addReport(
-      reportTitle,
-      imageUrl,
-      message,
-      userName,
-      locationName,
-      governmentBody
-    );
+    setLoading(true);
+
+    try {
+      if (file?.type.startsWith("image/")) {
+        console.log("image");
+        const web3 = new Web3Storage({
+          token:
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweEU5Nzg5OUYyZjQxNEEzMTlmY2VmRTQyZjk2MDVCNGMzMjI1OTE3MUQiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2OTY2MDA5MTMxOTIsIm5hbWUiOiJXZWIzUHJvamVjdCJ9.4gVVE4KVI0MxsAPrCO9d_qbqbcS3y50nMK7bm9AGur0",
+        });
+
+        console.log(file);
+        const ext = file.name.split(".").pop();
+        const newFile = new File([file], file.name, { type: file.type });
+        const cid = await web3.put([newFile], {
+          name: file.name,
+        });
+        const url = `https://ipfs.io/ipfs/${cid}/${file.name}`;
+      console.log(url);
+      const contract = await connectWithReportContract();
+      const response = await contract.addReport(
+        reportTitle,
+        url,
+        message,
+        userName,
+        locationName,
+        governmentBody
+      );
+      console.log(response);
+      setLoading(false);
+      setIsOpen(false);
+      }  else if (file?.type.startsWith("video/")) {
+        console.log("video");
+        var formdata = new FormData();
+        formdata.append("file", file, file.name);
+        formdata.append("filename", file.name);
+        console.log(formdata);
+
+        const web3 = new Web3Storage({
+          token:
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweEU5Nzg5OUYyZjQxNEEzMTlmY2VmRTQyZjk2MDVCNGMzMjI1OTE3MUQiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2OTY2MDA5MTMxOTIsIm5hbWUiOiJXZWIzUHJvamVjdCJ9.4gVVE4KVI0MxsAPrCO9d_qbqbcS3y50nMK7bm9AGur0",
+        });
+        const ext = file.name.split(".").pop();
+        const newFile = new File([file], file.name, { type: file.type });
+        const cid = await web3.put([newFile], {
+          name: file.name,
+        });
+        const url = `https://ipfs.io/ipfs/${cid}/${file.name}`;
+        console.log(url);
+        const contract = await connectWithReportContract();
+        const response = await contract.addReport(
+          reportTitle,
+          url,
+          message,
+          userName,
+          locationName,
+          governmentBody
+        );
+        console.log(response);
+        setLoading(false);
+        setIsOpen(false);
+      } else if (file?.type.startsWith("audio/")) {
+        console.log("audio");
+        var formdata = new FormData();
+        formdata.append("file", file, file.name);
+        formdata.append("filename", file.name);
+        console.log(formdata);
+
+        const web3 = new Web3Storage({
+          token:
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweEU5Nzg5OUYyZjQxNEEzMTlmY2VmRTQyZjk2MDVCNGMzMjI1OTE3MUQiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2OTY2MDA5MTMxOTIsIm5hbWUiOiJXZWIzUHJvamVjdCJ9.4gVVE4KVI0MxsAPrCO9d_qbqbcS3y50nMK7bm9AGur0",
+        });
+        const ext = file.name.split(".").pop();
+        const newFile = new File([file], file.name, { type: file.type });
+        const cid = await web3.put([newFile], {
+          name: file.name,
+        });
+        const url = `https://ipfs.io/ipfs/${cid}/${file.name}`;
+        const contract = await connectWithReportContract();
+        const response = await contract.addReport(
+          reportTitle,
+          url,
+          message,
+          userName,
+          locationName,
+          governmentBody
+        );
+        console.log(response);
+        setLoading(false);
+        setIsOpen(false);
+      }
+    } catch (error) {
+      console.log("error", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -78,12 +169,10 @@ const AddReport = () => {
                     Image Url
                   </label>
                   <input
-                    onChange={(e) => setImageUrl(e.target.value)}
-                    value={imageUrl}
-                    className="w-full rounded-lg border-gray-200 p-3 text-sm"
-                    placeholder="Image Url"
-                    type="text"
-                    id="imageurl"
+                    className="accent-gray-900 mt-2"
+                    name="media"
+                    type="file"
+                    onChange={(e) => setFile(e.target.files[0])}
                   />
                 </div>
                 <div>

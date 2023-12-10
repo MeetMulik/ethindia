@@ -1,6 +1,8 @@
 /* eslint-disable react/prop-types */
+import { useEffect, useState } from "react";
 import Comment from "./Comment";
 import { ChevronsDown } from "lucide-react";
+import Modal from "react-modal";
 
 function HeartIcon(props) {
   return (
@@ -42,6 +44,67 @@ function ReplyIcon(props) {
 }
 
 const PostCard = ({ report, connectWithReportContract }) => {
+  const [likes, setLikes] = useState(null);
+  const [liked, setLiked] = useState(false);
+  const [showCommentBox, setShowCommentBox] = useState(false);
+  const [commentText, setCommentText] = useState("");
+  const [comments, setComments] = useState([]);
+  const _id = report?.uid._hex[3] - 1;
+
+
+  const getLikes = async () => {
+    try {
+      const contract = await connectWithReportContract();
+      const response = await contract.getLikesOfReport(_id);
+      await setLiked(parseInt(response._hex, 16));
+      await setLikes(parseInt(response._hex, 16));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const likeAReport = async () => {
+    console.log("report liked", _id);
+
+    try {
+      const contract = await connectWithReportContract();
+      const response = await contract.likeTheReport(_id);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleComment = async (e) => {
+    e.preventDefault();
+    console.log("showCommentBox", commentText);
+    console.log("comment for", _id);
+    try {
+      const contract = await connectWithReportContract();
+      const response = await contract.addComment(_id, commentText);
+      await setCommentText("");
+    } catch (error) {
+      console.log("comment error", error);
+    } finally {
+      await setShowCommentBox(false);
+    }
+  };
+
+  const getPostComments = async (_id) => {
+    try {
+      const contract = await connectWithReportContract();
+      const response = await contract.getComment(_id);
+      setComments(response);
+      console.log("comments", comments);
+    } catch (error) {
+      console.log("Comment display error", error);
+    }
+  };
+
+  useEffect(() => {
+    getLikes();
+    getPostComments(_id);
+  }, [report, comments, likes]);
+
   return (
     <div className="w-3/4  bg-white rounded-lg shadow-md overflow-hidden">
       <div>
@@ -82,23 +145,52 @@ const PostCard = ({ report, connectWithReportContract }) => {
       </div>
       <div className="flex items-center justify-between p-4 border-t">
         <div className="flex items-center space-x-2">
-          <HeartIcon className="text-gray-500" />
-          <span className="text-sm">0 Likes</span>
-        </div>
-        <div className="flex items-center space-x-2">
-          <ReplyIcon className="text-gray-500" />
-          <span className="text-sm">Comments</span>
+          {/* <HeartIcon className="text-gray-500" />
+          <span className="text-sm">0 Upvotes</span> */}
+          <div className="flex items-center gap-1">
+            {liked ? (
+              <HeartIcon className="text-gray-500"
+                onClick={() => likeAReport()}
+                className="text-4xl rounded-full p-2 hover:bg-red-500/25 text-red-500"
+              />
+            ) : (
+              <HeartIcon className="text-gray-500"
+                onClick={() => likeAReport()}
+                className="text-4xl rounded-full p-2 hover:bg-red-500/25 hover:text-red-500"
+              />
+            )}
+            {likes && <h1 className="text-red-400">{likes}</h1>}
+          </div>
+
         </div>
       </div>
-      {/* <div className="flex items-center justify-center bg-gray-900">
-        <h2 className="text-lg lg:text-2xl font-bold text-white ">
-          Discussion
-        </h2>
-        <span className=" text-white">
-          <ChevronsDown />
-        </span>
-      </div> */}
-      {/* <Comment /> */}
+      <div className="bg-gray-900 flex">
+        <input
+          onChange={(e) => setCommentText(e.target.value)}
+          value={commentText}
+          className="w-full rounded-sm border-gray-200 p-3 text-sm"
+          placeholder="Comment here..."
+          type="text"
+        />
+        <button
+          className="text-white font-semibold bg-sky-500 rounded-sm px-4 py-2 "
+          onClick={handleComment}
+        >
+        Comment
+        </button>
+      </div>
+      <div>
+          {comments.length > 0 ? (
+            <div>
+              {comments.map((comment) => (
+                <Comment comment={comment} />
+              ))}
+            </div>
+          ) : (
+            <div>
+            </div>
+          )}
+        </div>
     </div>
   );
 };
