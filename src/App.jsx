@@ -34,7 +34,15 @@ const App = () => {
             </Layout>
           }
         />
-        <Route path="/posts" element={<Posts />} />
+        <Route
+          path="/posts"
+          element={
+            <Layout>
+              <Posts />
+            </Layout>
+          }
+        />
+        {/* <Route path="/posts" element={<Posts />} /> */}
       </Routes>
     </Router>
   );

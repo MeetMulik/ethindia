@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import Comment from "./Comment";
-import { ChevronsDown } from "lucide-react";
+import { ArrowBigUp } from "lucide-react";
 import Modal from "react-modal";
 
 function HeartIcon(props) {
@@ -50,7 +50,6 @@ const PostCard = ({ report, connectWithReportContract }) => {
   const [commentText, setCommentText] = useState("");
   const [comments, setComments] = useState([]);
   const _id = report?.uid._hex[3] - 1;
-
 
   const getLikes = async () => {
     try {
@@ -149,19 +148,19 @@ const PostCard = ({ report, connectWithReportContract }) => {
           <span className="text-sm">0 Upvotes</span> */}
           <div className="flex items-center gap-1">
             {liked ? (
-              <HeartIcon className="text-gray-500"
+              <ArrowBigUp
                 onClick={() => likeAReport()}
-                className="text-4xl rounded-full p-2 hover:bg-red-500/25 text-red-500"
+                className="text-4xl rounded-full p-2 hover:bg-red-500/25 text-red-500 w-10 h-10"
               />
             ) : (
-              <HeartIcon className="text-gray-500"
+              <ArrowBigUp
+                className="text-gray-500"
                 onClick={() => likeAReport()}
-                className="text-4xl rounded-full p-2 hover:bg-red-500/25 hover:text-red-500"
+                className="text-4xl rounded-full p-2 hover:bg-red-500/25 hover:text-red-500 w-10 h-10"
               />
             )}
             {likes && <h1 className="text-red-400">{likes}</h1>}
           </div>
-
         </div>
       </div>
       <div className="bg-gray-900 flex">
@@ -176,21 +175,20 @@ const PostCard = ({ report, connectWithReportContract }) => {
           className="text-white font-semibold bg-sky-500 rounded-sm px-4 py-2 "
           onClick={handleComment}
         >
-        Comment
+          Comment
         </button>
       </div>
       <div>
-          {comments.length > 0 ? (
-            <div>
-              {comments.map((comment) => (
-                <Comment comment={comment} />
-              ))}
-            </div>
-          ) : (
-            <div>
-            </div>
-          )}
-        </div>
+        {comments.length > 0 ? (
+          <div>
+            {comments.map((comment) => (
+              <Comment comment={comment} />
+            ))}
+          </div>
+        ) : (
+          <div></div>
+        )}
+      </div>
     </div>
   );
 };
