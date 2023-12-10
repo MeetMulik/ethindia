@@ -1,6 +1,6 @@
 const Hero = () => {
   return (
-    <div>
+    <div className="h-screen flex items-center justify-center">
       <div className="container relative mx-auto flex flex-col space-y-16 px-4 py-16 text-center lg:flex-row lg:space-y-0 lg:px-8 lg:py-32 lg:text-left xl:max-w-7xl">
         <div className="lg:flex lg:w-1/2 lg:items-center">
           <div>
@@ -54,7 +54,7 @@ const Hero = () => {
             <div className="absolute inset-0 -m-6 -rotate-2 rounded-xl bg-gray-200 dark:bg-gray-800" />
             <div className="absolute inset-0 -m-6 rotate-1 rounded-xl bg-blue-800 bg-opacity-75 shadow-inner dark:bg-blue-900 dark:bg-opacity-75" />
             <img
-              src="https://cdn.tailkit.com/media/placeholders/photo-RSCirJ70NDM-800x1000.jpg"
+              src="https://cdni.iconscout.com/illustration/premium/thumb/complaint-resolution-specialist-handling-customer-complaints-and-working-to-resolve-them-8978982-7328703.png"
               className="relative mx-auto rounded-lg shadow-lg"
               alt="Hero Image"
             />

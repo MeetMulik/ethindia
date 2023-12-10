@@ -73,7 +73,7 @@ const Navbar = () => {
                 <Link to={"/addreport"}>Add Report</Link>
               </li>
               <li className="text-gray-500 hover:text-indigo-600">
-                <Link to={"/view"}>View</Link>
+                <Link to={"/view"}>Anon-Aadhar Login</Link>
               </li>
               <li className="text-gray-500 hover:text-indigo-600">
                 <Link to={"/posts"}>Posts</Link>

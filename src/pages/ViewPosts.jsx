@@ -15,7 +15,7 @@ const ViewPosts = () => {
   }, [anonAadhaar]);
 
   return (
-    <div>
+    <div className="h-screen flex items-center justify-center flex-col">
       <LogInWithAnonAadhaar />
       <p>{anonAadhaar?.status}</p>
     </div>

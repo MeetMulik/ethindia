@@ -16,7 +16,7 @@ const Posts = () => {
   }, []);
 
   return (
-    <div className=" bg-gray-300 flex ">
+    <div className=" bg-gray-300 flex items-center justify-center  ">
       <div className="">
         <div className="scroll-smooth flex items-center justify-center w-full flex-col space-y-5 mt-3 mb-4">
           {reports.length > 0 ? (

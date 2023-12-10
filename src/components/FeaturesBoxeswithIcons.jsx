@@ -21,12 +21,11 @@ export default function FeaturesBoxeswithIcons() {
                 />
               </svg>
               <h4 className="mb-2 text-lg font-bold">
-                1. UI Components Library
+                1. Comment and Discussion Threads
               </h4>
               <p className="leading-relaxed text-gray-600 dark:text-gray-400">
-                We carefully handcrafted a vast collection of UI components to
-                build all kinds of web applications and websites. We keep
-                designing and adding new ones with each update.
+              Allow users and government bodies to engage in discussion threads related to specific complaints.
+              Foster community dialogue and collaboration.
               </p>
             </div>
             <div className="rounded-lg border border-white bg-white p-5 shadow-sm transition hover:border-blue-600 dark:border-gray-800 dark:bg-gray-800 dark:shadow-none dark:hover:border-blue-400 md:p-7 xl:p-10">
@@ -45,11 +44,10 @@ export default function FeaturesBoxeswithIcons() {
                   d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"
                 />
               </svg>
-              <h4 className="mb-2 text-lg font-bold">2. Self-Hosted Web App</h4>
+              <h4 className="mb-2 text-lg font-bold">2. Blockchain Integration:</h4>
               <p className="leading-relaxed text-gray-600 dark:text-gray-400">
-                You’ll love working with the Tailkit web app! It’s a compiled
-                Vue.js based app which you can host on your own and use to
-                explore and use all available UI components.
+              Blockchain Integration:
+Utilize blockchain (Ethereum or others) for decentralized data storage and immutability.Enhance security and trust through blockchain-based transactions
               </p>
             </div>
             <div className="rounded-lg border border-white bg-white p-5 shadow-sm transition hover:border-blue-600 dark:border-gray-800 dark:bg-gray-800 dark:shadow-none dark:hover:border-blue-400 sm:col-span-2 md:p-7 lg:col-span-1 xl:p-10">
@@ -68,11 +66,9 @@ export default function FeaturesBoxeswithIcons() {
                   d="M4.5 12a7.5 7.5 0 0015 0m-15 0a7.5 7.5 0 1115 0m-15 0H3m16.5 0H21m-1.5 0H12m-8.457 3.077l1.41-.513m14.095-5.13l1.41-.513M5.106 17.785l1.15-.964m11.49-9.642l1.149-.964M7.501 19.795l.75-1.3m7.5-12.99l.75-1.3m-6.063 16.658l.26-1.477m2.605-14.772l.26-1.477m0 17.726l-.26-1.477M10.698 4.614l-.26-1.477M16.5 19.794l-.75-1.299M7.5 4.205L12 12m6.894 5.785l-1.149-.964M6.256 7.178l-1.15-.964m15.352 8.864l-1.41-.513M4.954 9.435l-1.41-.514M12.002 12l-3.75 6.495"
                 />
               </svg>
-              <h4 className="mb-2 text-lg font-bold">3. Helper Tools</h4>
+              <h4 className="mb-2 text-lg font-bold">3. Complaint Submission </h4>
               <p className="leading-relaxed text-gray-600 dark:text-gray-400">
-                Search and copy SVG icons, build your button markup or copy your
-                favorite color classes with powerful tools. More are under
-                development to give you superpowers.
+              Intuitive form for users to submit detailed complaints.Options to categorize complaints (e.g., public services, infrastructure, environment).
               </p>
             </div>
           </div>
