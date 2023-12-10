@@ -211,6 +211,7 @@ const AddReport = () => {
                     placeholder="Location"
                     type="text"
                     id="location"
+                    onChange={(e) => setLocationName(e.target.value)}
                   />
                 </div>
 

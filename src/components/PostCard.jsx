@@ -113,14 +113,22 @@ const PostCard = ({ report, connectWithReportContract }) => {
             className="w-8 h-8 rounded-full"
             src="https://img.freepik.com/premium-photo/anime-male-avatar_950633-961.jpg"
           />
-          <div className="flex justify-between">
+          <div className="flex justify-end">
             <div className="flex flex-col">
-              <span className="font-semibold text-sm">{report.userName}</span>
+              <span className="font-semibold text-sm">{report.owner}</span>
               <span className="text-xs text-gray-500 mt-1">
                 {report.location}
               </span>
             </div>
-            <span className="ml-auto text-xs text-gray-500">a day ago</span>
+            <span className="mr-auto text-xs text-gray-500"> 
+            {new Date(
+                new Date().getTime() - parseInt(report.timestamp) * 1000
+              ).getHours() > 24
+                ? ""
+                : new Date(
+                    new Date().getTime() - parseInt(report.timestamp) * 1000
+                  ).getHours() + "h"}
+            </span>
           </div>
         </div>
       </div>
